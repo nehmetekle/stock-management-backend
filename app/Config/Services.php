@@ -4,6 +4,10 @@ namespace Config;
 
 use CodeIgniter\Config\BaseService;
 
+use App\Models\ProductModel;
+use App\Repositories\Implementations\ProductRepository;
+use App\Services\Implementations\ProductService;
+
 /**
  * Services Configuration file.
  *
@@ -19,14 +23,25 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
+    public static function productRepository(bool $getShared = true): ProductRepository
+    {
+        if ($getShared) {
+            return static::getSharedInstance('productRepository');
+        }
+
+        return new ProductRepository(
+            new ProductModel()
+        );
+    }
+
+    public static function productService(bool $getShared = true): ProductService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('productService');
+        }
+
+        return new ProductService(
+            static::productRepository()
+        );
+    }
 }

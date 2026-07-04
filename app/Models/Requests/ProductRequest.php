@@ -7,6 +7,7 @@ class ProductRequest
     public static function toRequest(array $data): array
     {
         return [
+            'id' => isset($data['id']) ? (int) $data['id'] : null,
             'name' => trim($data['name'] ?? ''),
             'sku' => trim($data['sku'] ?? ''),
             'weight' => isset($data['weight']) ? (int) $data['weight'] : null,

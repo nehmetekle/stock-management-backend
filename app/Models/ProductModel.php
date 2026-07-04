@@ -17,6 +17,7 @@ class ProductModel extends Model
         'stock_quantity',
         'category_id',
         'supplier_id',
+        'is_deleted',
     ];
 
     protected $useTimestamps = true;
