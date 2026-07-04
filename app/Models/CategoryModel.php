@@ -13,6 +13,7 @@ class CategoryModel extends Model
         'name',
         'description',
         'created_at',
+        'is_deleted',
     ];
 
     protected $useTimestamps = false;

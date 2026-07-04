@@ -15,6 +15,7 @@ class SupplierModel extends Model
         'phone',
         'country',
         'created_at',
+        'is_deleted',
     ];
 
     protected $useTimestamps = false;
