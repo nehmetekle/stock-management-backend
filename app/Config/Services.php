@@ -6,10 +6,13 @@ use App\Models\CategoryModel;
 use CodeIgniter\Config\BaseService;
 
 use App\Models\ProductModel;
+use App\Models\SupplierModel;
 use App\Repositories\Implementations\CategoryRepository;
 use App\Repositories\Implementations\ProductRepository;
+use App\Repositories\Implementations\SupplierRepository;
 use App\Services\Implementations\CategoryService;
 use App\Services\Implementations\ProductService;
+use App\Services\Implementations\SupplierService;
 
 /**
  * Services Configuration file.
@@ -69,4 +72,26 @@ class Services extends BaseService
             static::categoryRepository()
         );
     }
+
+    public static function supplierRepository(bool $getShared = true): SupplierRepository
+{
+    if ($getShared) {
+        return static::getSharedInstance('supplierRepository');
+    }
+
+    return new SupplierRepository(
+        new SupplierModel()
+    );
+}
+
+public static function supplierService(bool $getShared = true): SupplierService
+{
+    if ($getShared) {
+        return static::getSharedInstance('supplierService');
+    }
+
+    return new SupplierService(
+        static::supplierRepository()
+    );
+}
 }
