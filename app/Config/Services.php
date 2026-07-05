@@ -2,10 +2,13 @@
 
 namespace Config;
 
+use App\Models\CategoryModel;
 use CodeIgniter\Config\BaseService;
 
 use App\Models\ProductModel;
+use App\Repositories\Implementations\CategoryRepository;
 use App\Repositories\Implementations\ProductRepository;
+use App\Services\Implementations\CategoryService;
 use App\Services\Implementations\ProductService;
 
 /**
@@ -42,6 +45,28 @@ class Services extends BaseService
 
         return new ProductService(
             static::productRepository()
+        );
+    }
+
+    public static function categoryRepository(bool $getShared = true): CategoryRepository
+    {
+        if ($getShared) {
+            return static::getSharedInstance('categoryRepository');
+        }
+
+        return new CategoryRepository(
+            new CategoryModel()
+        );
+    }
+
+    public static function categoryService(bool $getShared = true): CategoryService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('categoryService');
+        }
+
+        return new CategoryService(
+            static::categoryRepository()
         );
     }
 }
