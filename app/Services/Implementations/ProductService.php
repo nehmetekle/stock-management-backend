@@ -156,16 +156,16 @@ class ProductService implements IProductService
             $errors['sku'] = 'SKU is required';
         }
 
-        if (!isset($data['weight']) || $data['weight'] < 0) {
+        if (!isset($data['weight']) || $data['weight'] <= 0) {
             $errors['weight'] = 'Weight must be a positive number';
         }
 
-        if (!isset($data['price']) || $data['price'] < 0) {
+        if (!isset($data['price']) || $data['price'] <= 0) {
             $errors['price'] = 'Price must be a positive number';
         }
 
         if (!isset($data['stock_quantity']) || $data['stock_quantity'] < 0) {
-            $errors['stock_quantity'] = 'Stock quantity must be a positive number';
+            $errors['stock_quantity'] = 'Stock quantity must be zero or a positive number';
         }
 
         if (empty($data['category_id']) || !$this->productRepository->categoryExists((int) $data['category_id'])) {

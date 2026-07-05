@@ -86,6 +86,7 @@ class ProductRepository implements IProductRepository
         return Database::connect()
             ->table('categories')
             ->where('id', $categoryId)
+            ->where('is_deleted', 0)
             ->countAllResults() > 0;
     }
 
@@ -94,6 +95,7 @@ class ProductRepository implements IProductRepository
         return Database::connect()
             ->table('suppliers')
             ->where('id', $supplierId)
+            ->where('is_deleted', 0)
             ->countAllResults() > 0;
     }
 }
