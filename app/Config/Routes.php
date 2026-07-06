@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
+$routes->options('(:any)', static fn () => service('response')->setStatusCode(204));
+
 
 // products routes
 $routes->get('products', 'ProductsController::index');
